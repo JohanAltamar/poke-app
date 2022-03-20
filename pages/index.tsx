@@ -7,13 +7,13 @@ import { pokeApi } from "api";
 import { Layout } from "@/components/layouts";
 
 // Types
-import { PokemonListResponse, Pokemon } from "@/interfaces";
+import { PokemonListResponse, SmallPokemon } from "@/interfaces";
 
 // Components
 import { PokemonCard } from "@/components/pokemon";
 
 interface HomePageProps {
-  pokemons: Pokemon[];
+  pokemons: SmallPokemon[];
 }
 
 const HomePage: NextPage<HomePageProps> = ({ pokemons }) => {
@@ -33,7 +33,7 @@ export default HomePage;
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const { data } = await pokeApi.get<PokemonListResponse>("/pokemon?limit=151");
 
-  const pokemons: Pokemon[] = data?.results.map((pokemon, index) => ({
+  const pokemons: SmallPokemon[] = data?.results.map((pokemon, index) => ({
     ...pokemon,
     id: index + 1,
     img: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${
