@@ -6,7 +6,7 @@ export const Navbar = () => {
   return (
     <div className="flex items-center justify-between w-full p-0 px-5 bg-red-600 dark:bg-gray-800 text-white">
       <Link href="/" passHref>
-        <div className="text-2xl flex items-center hover:cursor-pointer">
+        <a className="text-2xl flex items-center hover:cursor-pointer">
           <Image
             src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"
             alt="app icon"
@@ -14,9 +14,11 @@ export const Navbar = () => {
             height={70}
           />
           <span className="text-3xl">P</span>okémon
-        </div>
+        </a>
       </Link>
-      <span>Favorites</span>
+      <Link href="/favorites" passHref>
+        Favorites
+      </Link>
     </div>
   );
 };
