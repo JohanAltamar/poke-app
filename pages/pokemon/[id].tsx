@@ -14,7 +14,7 @@ const PokemonPage: NextPage<PokemonPageProps> = ({ pokemon }) => {
   const { id, name } = pokemon;
 
   return (
-    <Layout>
+    <Layout pokemon={pokemon.name}>
       <div className="grid grid-cols-12 gap-4 py-5">
         <div className="col-span-12 sm:col-span-4 justify-self-center p-4 rounded-lg shadow-md w-full flex justify-center">
           <Image
