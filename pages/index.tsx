@@ -1,9 +1,16 @@
 import type { NextPage, GetStaticProps } from "next";
 
-import { Layout } from "@/components/layouts";
+// Apis
 import { pokeApi } from "api";
+
+// Layouts
+import { Layout } from "@/components/layouts";
+
+// Types
 import { PokemonListResponse, Pokemon } from "@/interfaces";
-import Image from "next/image";
+
+// Components
+import { PokemonCard } from "@/components/pokemon";
 
 interface HomePageProps {
   pokemons: Pokemon[];
@@ -14,21 +21,7 @@ const HomePage: NextPage<HomePageProps> = ({ pokemons }) => {
     <Layout>
       <div className="grid grid-cols-12 gap-4 py-5">
         {pokemons.map((pokemon) => (
-          <div
-            key={pokemon.id}
-            className="col-span-6 sm:col-span-4 md:col-span-3 lg:col-span-2 2xl:col-span-1 p-4 rounded-lg shadow-md hover:shadow-lg hover:cursor-pointer transition-all"
-          >
-            <Image
-              src={pokemon.img}
-              alt={pokemon.name}
-              width={140}
-              height={140}
-            />
-            <div className="flex justify-between">
-              <span className="capitalize">{pokemon.name}</span>
-              <span className="capitalize">#{pokemon.id}</span>
-            </div>
-          </div>
+          <PokemonCard key={pokemon.id} {...pokemon} />
         ))}
       </div>
     </Layout>
