@@ -15,8 +15,8 @@ const PokemonPage: NextPage<PokemonPageProps> = ({ pokemon }) => {
 
   return (
     <Layout>
-      <div className="grid grid-cols-12 gap-4">
-        <div className="col-span-12 sm:col-span-4 justify-self-center p-4">
+      <div className="grid grid-cols-12 gap-4 py-5">
+        <div className="col-span-12 sm:col-span-4 justify-self-center p-4 rounded-lg shadow-md w-full flex justify-center">
           <Image
             src={pokemon.sprites.other?.dream_world.front_default || ""}
             alt={pokemon.name}
@@ -24,7 +24,7 @@ const PokemonPage: NextPage<PokemonPageProps> = ({ pokemon }) => {
             height={140}
           />
         </div>
-        <div className="col-span-12 sm:col-span-8 p-4">
+        <div className="col-span-12 sm:col-span-8 p-4 rounded-lg shadow-md">
           <div className="flex w-full justify-between">
             <h1 className="capitalize font-semibold text-2xl">
               {pokemon.name}
@@ -35,7 +35,7 @@ const PokemonPage: NextPage<PokemonPageProps> = ({ pokemon }) => {
           </div>
           <div>
             <span>Sprites:</span>
-            <div className="flex w-full">
+            <div className="flex w-full justify-between">
               <Image
                 src={pokemon.sprites.front_default}
                 alt={pokemon.name}
