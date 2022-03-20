@@ -1,6 +1,8 @@
 import React from "react";
 import Head from "next/head";
 
+import { Navbar } from "@/components/ui";
+
 interface LayoutProps {
   title?: string;
 }
@@ -18,9 +20,9 @@ export const Layout: React.FC<LayoutProps> = ({
         <meta name="keywords" content="pokemon, pokedex, XXXX" />
       </Head>
 
-      {/* Navbar */}
+      <Navbar />
 
-      <main>{children}</main>
+      <main className="px-5">{children}</main>
     </>
   );
 };
