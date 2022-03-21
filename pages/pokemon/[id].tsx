@@ -5,9 +5,8 @@ import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import confetti from "canvas-confetti";
 
 import { Layout } from "@/components/layouts";
-import { pokeApi } from "api";
 import { Pokemon } from "interfaces";
-import { localStorage } from "utils";
+import { getPokemonInfo, localStorage } from "utils";
 
 interface PokemonPageProps {
   pokemon: Pokemon;
@@ -99,21 +98,27 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false, // false or 'blocking'
+    fallback: "blocking", // true, false or 'blocking'
   };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { id } = params as { id: string };
-  const { data } = await pokeApi.get<Pokemon>(`/pokemon/${id}`);
+
+  const pokemon = await getPokemonInfo(id);
+
+  if (!pokemon) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
 
   return {
     props: {
-      pokemon: {
-        name: data.name,
-        id: data.id,
-        sprites: data.sprites,
-      },
+      pokemon,
     },
     revalidate: 86400,
   };

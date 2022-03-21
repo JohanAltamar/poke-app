@@ -4,6 +4,7 @@ import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import PokemonPage from "../[id]";
 import { pokeApi } from "api";
 import type { PokemonListResponse, Pokemon } from "interfaces";
+import { getPokemonInfo } from "utils";
 
 interface PokemonByNamePageProps {
   pokemon: Pokemon;
@@ -24,21 +25,27 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false,
+    fallback: "blocking",
   };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { name } = params as { name: string };
-  const { data } = await pokeApi.get<Pokemon>(`/pokemon/${name}`);
+
+  const pokemon = await getPokemonInfo(name);
+
+  if (!pokemon) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
 
   return {
     props: {
-      pokemon: {
-        name: data.name,
-        id: data.id,
-        sprites: data.sprites,
-      },
+      pokemon,
     },
     revalidate: 86400,
   };
