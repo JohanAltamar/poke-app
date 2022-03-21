@@ -1,17 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 
-import { pokeApi } from "api";
+import confetti from "canvas-confetti";
+
 import { Layout } from "@/components/layouts";
+import { pokeApi } from "api";
 import { Pokemon } from "interfaces";
+import { localStorage } from "utils";
 
 interface PokemonPageProps {
   pokemon: Pokemon;
 }
 
 const PokemonPage: NextPage<PokemonPageProps> = ({ pokemon }) => {
-  const { id, name } = pokemon;
+  const [isFavorite, setIsFavorite] = useState(
+    localStorage.isInFavoriteList(pokemon.id)
+  );
+
+  const handleToggleFavorite = () => {
+    localStorage.toggleFavorites(pokemon.id);
+    setIsFavorite(!isFavorite);
+
+    if (!isFavorite) {
+      confetti({
+        angle: -120,
+        spread: 100,
+        particleCount: 200,
+        origin: { y: 0, x: 1 },
+      });
+    }
+  };
 
   return (
     <Layout pokemon={pokemon.name}>
@@ -29,8 +48,11 @@ const PokemonPage: NextPage<PokemonPageProps> = ({ pokemon }) => {
             <h1 className="capitalize font-semibold text-2xl">
               {pokemon.name}
             </h1>
-            <button className="text-white rounded-xl bg-red-600 hover:bg-red-500 transition-colors px-4 flex items-center justify-center font-semibold">
-              Save Favorite
+            <button
+              className="text-white rounded-xl bg-red-600 hover:bg-red-500 transition-colors px-4 flex items-center justify-center font-semibold"
+              onClick={handleToggleFavorite}
+            >
+              {isFavorite ? "Remove Favorite" : "Add Favorite"}
             </button>
           </div>
           <div>
