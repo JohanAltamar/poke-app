@@ -2,9 +2,11 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { ThemeSelector } from "@/components/ui";
+
 export const Navbar = () => {
   return (
-    <div className="flex items-center justify-between w-full p-0 px-5 bg-red-600 dark:bg-gray-800 text-white">
+    <div className="flex h-[70px] justify-between items-center w-full p-0 px-5 bg-red-600 dark:bg-gray-900 text-white">
       <Link href="/" passHref>
         <a className="text-2xl flex items-center hover:cursor-pointer">
           <Image
@@ -16,9 +18,12 @@ export const Navbar = () => {
           <span className="text-3xl">P</span>okémon
         </a>
       </Link>
-      <Link href="/favorites" passHref>
-        Favorites
-      </Link>
+      <div className="flex h-full">
+        <ThemeSelector />
+        <Link href="/favorites" passHref>
+          <a className="h-full flex items-center">Favorites</a>
+        </Link>
+      </div>
     </div>
   );
 };
