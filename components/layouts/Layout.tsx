@@ -8,6 +8,7 @@ interface LayoutProps {
   pokemon?: string;
 }
 
+const origin = typeof window === "undefined" ? "" : window.location.origin;
 export const Layout: React.FC<LayoutProps> = ({
   children,
   title = "Pokemon App",
@@ -38,6 +39,16 @@ export const Layout: React.FC<LayoutProps> = ({
             <meta name="keywords" content="pokemon, pokedex, poke-app" />
           </>
         )}
+
+        <meta
+          property="og:title"
+          content={`Information about Pokemon ${pokemon}`}
+        />
+        <meta
+          property="og:description"
+          content={`Information about Pokemon ${pokemon}`}
+        />
+        <meta property="og:image" content={`${origin}/img/banner.png`} />
       </Head>
 
       <Navbar />
