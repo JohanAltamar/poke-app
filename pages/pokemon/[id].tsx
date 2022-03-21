@@ -115,5 +115,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         sprites: data.sprites,
       },
     },
+    revalidate: 86400,
   };
 };
