@@ -34,7 +34,7 @@ const PokemonPage: NextPage<PokemonPageProps> = ({ pokemon }) => {
   return (
     <Layout pokemon={pokemon.name}>
       <div className="grid grid-cols-12 gap-4 py-5">
-        <div className="col-span-12 sm:col-span-4 justify-self-center p-4 rounded-lg shadow-md w-full flex justify-center">
+        <div className="col-span-12 sm:col-span-4 justify-self-center p-4 rounded-lg shadow-md w-full flex justify-center dark:shadow-none dark:bg-gray-800">
           <Image
             src={pokemon.sprites.other?.dream_world.front_default || ""}
             alt={pokemon.name}
@@ -42,13 +42,13 @@ const PokemonPage: NextPage<PokemonPageProps> = ({ pokemon }) => {
             height={140}
           />
         </div>
-        <div className="col-span-12 sm:col-span-8 p-4 rounded-lg shadow-md">
+        <div className="col-span-12 sm:col-span-8 p-4 rounded-lg shadow-md dark:shadow-none dark:bg-gray-800">
           <div className="flex w-full justify-between">
             <h1 className="capitalize font-semibold text-2xl">
               {pokemon.name}
             </h1>
             <button
-              className="text-white rounded-xl bg-red-600 hover:bg-red-500 transition-colors px-4 flex items-center justify-center font-semibold"
+              className="box-border text-white rounded-xl bg-red-600 border-2 border-red-600 hover:bg-red-500 dark:bg-transparent dark:border-2 dark:border-blue-800 dark:hover:bg-gray-700 transition-colors px-4 flex items-center justify-center font-semibold"
               onClick={handleToggleFavorite}
             >
               {isFavorite ? "Remove Favorite" : "Add Favorite"}
